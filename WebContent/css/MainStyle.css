@@ -1,0 +1,90 @@
+@CHARSET "ISO-8859-1";
+.center {
+	background: lightblue;
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 50px;
+	border-radius:10px;
+}
+
+.login tr td{
+	padding: 5px;
+}
+
+.btn{
+	padding: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: bold;
+	font-size: 14px;
+	border-radius:4px;
+}
+
+.msg{
+	color:red;
+}
+
+.formelement{
+	margin: 10px;
+	font-weight: bold;
+}
+
+.formbtn{
+	padding : 5px;
+	font-weight: bold;
+}
+
+
+.dialog{
+	display:block;
+	background: lightblue;
+	border-radius : 5px;
+	margin : 10px;
+	min-height: 40px;	
+}
+
+.dialog-heading{
+	display:block;
+	font-weight: bold;
+	background: gray;
+	padding:10px;
+	color: white;
+}
+
+.dialog-content{
+	display:block;
+	font-weight: normal;
+	padding:5px;
+	padding-bottom:15px;
+	word-break: break-all;
+}
+
+.back-yellow{
+	background : lightyellow;
+}
+
+.btn-again{
+	padding : 10px;
+	float:right;
+	background: silver;
+	color : white;
+	transition:.3s;
+	border-radius:4px;
+	text-decoration: none;
+	margin: 5px;
+}
+
+.btn-again:hover{
+	padding : 11px;
+	background: silver;
+	transition:.3s;
+	float:right;
+	color : white;
+	border-radius:4px;
+	text-decoration: none;
+	margin: 5px;
+}
+
