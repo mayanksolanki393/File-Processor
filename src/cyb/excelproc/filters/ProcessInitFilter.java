@@ -29,11 +29,11 @@ import cyb.excelproc.entities.File.FileType;
 @WebFilter("/welcome.jsp")
 public class ProcessInitFilter implements Filter {
 	ITransactionDao transactionDao;
-	Logger log; 
+	private static Logger log = Logger.getLogger(ProcessInitFilter.class);
     public ProcessInitFilter() {
     	try{
+
     		transactionDao = new TransactionDaoImpl();
-    		log = Logger.getLogger(this.getClass());
     	}
     	catch(Exception ex){
     		log.error(ex);
