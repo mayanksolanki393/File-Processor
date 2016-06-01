@@ -24,7 +24,8 @@ public class ContextListener implements ServletContextListener {
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
-    public void contextInitialized(ServletContextEvent event)  { 
+    public void contextInitialized(ServletContextEvent event)  {
+    	System.setProperty("logdir", System.getenv("logdir"));
         LoggerUtils.loggerInit(event.getServletContext().getRealPath(""));
     	EntityManagerUtils.getFactory();
         System.out.println("context initilized");
