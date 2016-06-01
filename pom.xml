@@ -13,6 +13,21 @@
 	</properties>
 
 	<dependencies>
+		<!-- http://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>8.5.0</version>
+		</dependency>
+
+		<!-- http://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jsp-api -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jsp-api</artifactId>
+			<version>8.5.0</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
