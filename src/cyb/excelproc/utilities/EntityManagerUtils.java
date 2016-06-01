@@ -7,21 +7,21 @@ import javax.persistence.Persistence;
 import org.apache.log4j.Logger;
 
 public class EntityManagerUtils {
-	private static Logger LOG = Logger.getLogger(EntityManagerUtils.class);
+	private static Logger log = Logger.getLogger(EntityManagerUtils.class);
 	private static EntityManagerFactory factory;
 	
 	public static EntityManagerFactory getFactory(){
 	try {
 		if(factory==null){
-			LOG.info("creating factory");
+			log.info("creating factory");
 			factory = Persistence.createEntityManagerFactory("PersistenceUnit");
-			LOG.info("factory created : "+factory);
+			log.info("factory created : "+factory);
 		}
 		return factory;
 	}
 	catch(Exception ex){
 		ex.printStackTrace();
-		LOG.error(ex);
+		log.error(ex);
 		return null;
 	}
 	}
@@ -34,7 +34,7 @@ public class EntityManagerUtils {
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-			LOG.error(ex);
+			log.error(ex);
 		}
 	}
 }
