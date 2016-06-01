@@ -5,6 +5,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import cyb.excelproc.utilities.EntityManagerUtils;
+import cyb.excelproc.utilities.LoggerUtils;
 
 /**
  * Application Lifecycle Listener implementation class ContextListener
@@ -23,8 +24,9 @@ public class ContextListener implements ServletContextListener {
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
-    public void contextInitialized(ServletContextEvent arg0)  { 
-        EntityManagerUtils.getFactory();
+    public void contextInitialized(ServletContextEvent event)  { 
+        LoggerUtils.loggerInit(event.getServletContext().getRealPath(""));
+    	EntityManagerUtils.getFactory();
         System.out.println("context initilized");
     }
 
