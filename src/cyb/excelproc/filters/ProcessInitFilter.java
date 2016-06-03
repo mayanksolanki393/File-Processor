@@ -21,6 +21,7 @@ import cyb.excelproc.dao.impl.TransactionDaoImpl;
 import cyb.excelproc.entities.File;
 import cyb.excelproc.entities.Transaction;
 import cyb.excelproc.entities.User;
+import cyb.excelproc.entities.UserTransaction;
 import cyb.excelproc.entities.File.FileType;
 
 /**
@@ -60,11 +61,13 @@ public class ProcessInitFilter implements Filter {
 				log.info("creating new transaction");
 				//creating transaction object
 				Transaction trans = new Transaction();
+				UserTransaction userTransaction = new UserTransaction();
 				
 				//setting basic values
-				trans.setTnxCreationTime(new Date());
-				trans.setTnxLastModificationTime(new Date());
-				trans.setUser((User) req.getSession().getAttribute("user"));
+				userTransaction.setTransaction(trans);
+				userTransaction.setTnxCreationTime(new Date());
+				userTransaction.setTnxLastModificationTime(new Date());
+				userTransaction.setUser((User) req.getSession().getAttribute("user"));
 				
 				//saving transaction to generate transaction id
 				trans = transactionDao.addTransaction(trans);

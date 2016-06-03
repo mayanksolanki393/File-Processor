@@ -1,11 +1,15 @@
 package cyb.excelproc.entities;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +23,7 @@ public class User {
 	private long userId;
 	private String userName;
 	private String userPass;
+	private List<UserTransaction> transactionList = new LinkedList<>();	
 	
 	//constructors
 	public User() {
@@ -70,6 +75,17 @@ public class User {
 
 	public void setUserPass(String userPass) {
 		this.userPass = userPass;
+	}
+
+	@OneToMany(mappedBy="user")
+	public List<UserTransaction> getTransactionList() {
+		if(transactionList== null)
+			transactionList = new LinkedList<>();
+		return transactionList;
+	}
+
+	public void setTransactionList(List<UserTransaction> transactionList) {
+		this.transactionList = transactionList;
 	}
 
 	//to String

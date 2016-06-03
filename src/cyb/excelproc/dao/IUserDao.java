@@ -11,4 +11,5 @@ public interface IUserDao {
 
 	public User getUserByUsername(String username) throws PersistenceException;
 
+	public User setUser(User user) throws PersistenceException;
 }

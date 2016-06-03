@@ -16,54 +16,45 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;;
 
 @Entity
-@Table(name="transactions")
-@NamedQueries({
-	@NamedQuery(name="Transaction.list",query="select t from Transaction t")
-})
+@Table(name = "transactions")
+@NamedQueries({ @NamedQuery(name = "Transaction.list", query = "select t from Transaction t") })
 public class Transaction {
-	//state members
+	// state members
 	private long tnxId;
-	private User user;
 	private Action action;
-	private Date tnxCreationTime;
-	private Date tnxLastModificationTime;
 	private List<File> tnxFiles;
-	
-	//constructors
+	private UserTransaction userTransaction;
+
+	// constructors
 	public Transaction() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Transaction(long tnxId) {
 		super();
 		this.tnxId = tnxId;
 	}
 
-	public Transaction(User user, Action action, Date tnxCreationTime, Date tnxLastModificationTime,
-			List<File> tnxFiles) {
+	public Transaction(Action action, List<File> tnxFiles, UserTransaction userTransaction) {
 		super();
-		this.user = user;
 		this.action = action;
-		this.tnxCreationTime = tnxCreationTime;
-		this.tnxLastModificationTime = tnxLastModificationTime;
 		this.tnxFiles = tnxFiles;
+		this.userTransaction = userTransaction;
 	}
 
-	public Transaction(long tnxId, User user, Action action, Date tnxCreationTime, Date tnxLastModificationTime,
-			List<File> tnxFiles) {
+	public Transaction(long tnxId, Action action, List<File> tnxFiles, UserTransaction userTransaction) {
 		super();
 		this.tnxId = tnxId;
-		this.user = user;
 		this.action = action;
-		this.tnxCreationTime = tnxCreationTime;
-		this.tnxLastModificationTime = tnxLastModificationTime;
 		this.tnxFiles = tnxFiles;
+		this.userTransaction = userTransaction;
 	}
 
-	//getters and setters
+	// getters and setters
 	@Id
 	@GeneratedValue
 	public long getTnxId() {
@@ -73,19 +64,9 @@ public class Transaction {
 	public void setTnxId(long tnxId) {
 		this.tnxId = tnxId;
 	}
-	
-	@OneToOne
-	@JoinColumn(name="userId")
-	public User getUser() {
-		return user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	@OneToOne
-	@JoinColumn(name="actionId")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "actionId")
 	public Action getAction() {
 		return action;
 	}
@@ -93,26 +74,8 @@ public class Transaction {
 	public void setAction(Action action) {
 		this.action = action;
 	}
-	  
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getTnxCreationTime() {
-		return tnxCreationTime;
-	}
 
-	public void setTnxCreationTime(Date tnxCreationTime) {
-		this.tnxCreationTime = tnxCreationTime;
-	}
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getTnxLastModificationTime() {
-		return tnxLastModificationTime;
-	}
-
-	public void setTnxLastModificationTime(Date tnxLastModificationTime) {
-		this.tnxLastModificationTime = tnxLastModificationTime;
-	}
-
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="tnx")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "tnx")
 	public List<File> getTnxFiles() {
 		return tnxFiles;
 	}
@@ -121,22 +84,27 @@ public class Transaction {
 		this.tnxFiles = tnxFiles;
 	}
 
-	public void addFile(File file){
-		if(tnxFiles == null){
+	@OneToOne(mappedBy = "transaction")
+	@Transient
+	public UserTransaction getUserTransaction() {
+		return userTransaction;
+	}
+
+	public void setUserTransaction(UserTransaction userTransaction) {
+		this.userTransaction = userTransaction;
+	}
+
+	public void addFile(File file) {
+		if (tnxFiles == null) {
 			tnxFiles = new LinkedList<>();
 		}
 		tnxFiles.add(file);
 	}
+
 	@Override
 	public String toString() {
-		return "Transaction [tnxId=" + tnxId + ", user=" + user + ", action=" + action + ", tnxCreationTime="
-				+ tnxCreationTime + ", tnxLastModificationTime=" + tnxLastModificationTime + ", tnxFiles=" + tnxFiles
-				+ "]";
+		return "Transaction [tnxId=" + tnxId + ", action=" + action + ", tnxFiles=" + tnxFiles + ", userTransaction="
+		        + userTransaction + "]";
 	}
-	
-	
-	
-	
-	
-	
+
 }

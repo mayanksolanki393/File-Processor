@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import cyb.excelproc.dao.IUserDao;
 import cyb.excelproc.entities.User;
+import cyb.excelproc.exceptions.QueryNotDefinedException;
 import cyb.excelproc.utilities.EntityManagerUtils;
 
 public class UserDaoImpl implements IUserDao {
@@ -17,7 +18,7 @@ public class UserDaoImpl implements IUserDao {
 	private static Logger log = Logger.getLogger(UserDaoImpl.class);
 	GenericDao<User> genUser;
 	
-	public UserDaoImpl() throws Exception{
+	public UserDaoImpl() throws QueryNotDefinedException,PersistenceException{
 		genUser = new GenericDao<>(EntityManagerUtils.getFactory(),User.class);
 	}
 
@@ -47,6 +48,11 @@ public class UserDaoImpl implements IUserDao {
 			if(manager!=null)
 				manager.close();
 		}
+	}
+
+	@Override
+	public User setUser(User user) throws PersistenceException {
+		return genUser.set(user);
 	}
 
 

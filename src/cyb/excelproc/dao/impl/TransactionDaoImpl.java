@@ -6,13 +6,14 @@ import org.apache.log4j.Logger;
 
 import cyb.excelproc.dao.ITransactionDao;
 import cyb.excelproc.entities.Transaction;
+import cyb.excelproc.exceptions.QueryNotDefinedException;
 import cyb.excelproc.utilities.EntityManagerUtils;
 
 public class TransactionDaoImpl implements ITransactionDao {
 	private static Logger log = Logger.getLogger(ActionDaoImpl.class);
 	GenericDao<Transaction> genTrans;
 	
-	public TransactionDaoImpl() throws Exception{
+	public TransactionDaoImpl() throws QueryNotDefinedException,PersistenceException{
 		genTrans = new GenericDao<>(EntityManagerUtils.getFactory(),Transaction.class);
 	}
 
