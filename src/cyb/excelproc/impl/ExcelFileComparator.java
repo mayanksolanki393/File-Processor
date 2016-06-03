@@ -96,7 +96,8 @@ public class ExcelFileComparator extends ExcelFileProccessor{
 				str1 = str1.trim();
 				str2 = str2.trim();
 			}
-			output.put("output",str1+str2);
+			output.put("output","Given files dont have same content");
+			output.put("difference",str1+str2);
 		}
 		return output;		
 	}
